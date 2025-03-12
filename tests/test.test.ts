@@ -5,14 +5,14 @@ import { urlConfig } from 'config/env.config';
 let homePage: HomePage;
 
 test.describe('example', () => {
-    test.beforeEach(async ({ pageProvider }) => {
-        homePage = pageProvider.homePage;
-    })
+  test.beforeEach(async ({ pageProvider }) => {
+    homePage = pageProvider.homePage;
+  });
 
-    test.only('example', async () => {
-        {
-            await homePage.goToPage();
-            expect(await homePage.url).toEqual(urlConfig.ui.homePage);
-        }
-    })
+  test('example', async () => {
+    {
+      await homePage.goToPage();
+      expect(await homePage.url).toEqual(urlConfig.ui.homePage);
+    }
+  });
 });

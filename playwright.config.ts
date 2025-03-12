@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { } from 'dotenv/config';
+import {} from 'dotenv/config';
 
 export const auth = 'test-results/.auth';
 export const testResults = 'test-results';
@@ -8,14 +8,14 @@ export const playwrightReport = 'playwright-report';
 
 export default defineConfig({
   testDir: './tests',
-  // globalSetup: require.resolve('./config/global-setup.ts'),
-  // globalTeardown: require.resolve('./config/global-teardown.ts'),
+  globalSetup: require.resolve('./config/global-setup.ts'),
+  globalTeardown: require.resolve('./config/global-teardown.ts'),
   timeout: 30 * 1000,
   expect: {
     timeout: 30 * 1000,
     toHaveScreenshot: {
-      maxDiffPixels: 100
-    }
+      maxDiffPixels: 100,
+    },
   },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -46,5 +46,5 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-  ]
+  ],
 });

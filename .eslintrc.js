@@ -4,10 +4,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: [
-    'plugin:playwright/playwright-test',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['plugin:playwright/playwright-test', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
