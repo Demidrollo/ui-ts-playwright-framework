@@ -1,6 +1,6 @@
 name: PR & Branch & Commit Titles & Texts Checks
 
-on: 
+on:
   pull_request:
     types:
       - synchronize
@@ -8,11 +8,11 @@ on:
       - edited
       - reopened
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }} - ${{ github.ref }}
   cancel-in-progress: true
 
-jobs: 
+jobs:
   pr-naming:
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -34,16 +34,16 @@ jobs:
 
       - name: Check PR title
         uses: actions/github-script@v6
-        env: 
+        env:
           prTitle: ${{ github.event.pull_request.title }}
-        with: 
+        with:
           script: |
             const { prTitle } = process.env;
             const pattern = /^TASK-\d+ [A-Z]+.*[^\.]+$/;
             if (!pattern.test(prTitle)) {
               core.setFailed('The PR title is invalid');
             }
-      
+
       - name: Check commit messages
         uses: actions/github-script@v6
         env:

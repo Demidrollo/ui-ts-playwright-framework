@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { } from 'dotenv/config';
+import {} from 'dotenv/config';
 
 export const auth = 'test-results/.auth';
 export const testResults = 'test-results';
@@ -14,8 +14,8 @@ export default defineConfig({
   expect: {
     timeout: 30 * 1000,
     toHaveScreenshot: {
-      maxDiffPixels: 100
-    }
+      maxDiffPixels: 100,
+    },
   },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -46,5 +46,5 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-  ]
+  ],
 });

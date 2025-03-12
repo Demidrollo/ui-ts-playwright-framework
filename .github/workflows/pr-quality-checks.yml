@@ -1,6 +1,6 @@
 name: PR Code Quality Checks
 
-on: 
+on:
   pull_request:
     branches:
       - main

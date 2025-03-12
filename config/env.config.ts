@@ -3,12 +3,12 @@
 export const baseUrl = process.env.BASE_URL;
 
 export const urlConfig = {
-    ui: {
-        homePage: baseUrl,
-        loginPage: baseUrl + '/login'
-    },
-    api: {}
-}
+  ui: {
+    homePage: baseUrl,
+    loginPage: baseUrl + '/login',
+  },
+  api: {},
+};
 
 // this method is used to set the build version (workflow number) in local storage
 

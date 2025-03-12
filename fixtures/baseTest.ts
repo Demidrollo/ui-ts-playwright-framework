@@ -7,62 +7,59 @@ import { BasePage } from 'page/base.page';
 import { Element } from 'core/element';
 
 export const test = base.extend<
-    {
-        pageProvider: PageProvider;
-    },
-    {
-        workerStorageState: string;
-    }
+  {
+    pageProvider: PageProvider;
+  },
+  {
+    workerStorageState: string;
+  }
 >({
-    pageProvider: async ({ browser, page }, use) => {
-        await use(new PageProvider(browser, page));
+  pageProvider: async ({ browser, page }, use) => {
+    await use(new PageProvider(browser, page));
+  },
+
+  storageState: ({ workerStorageState }, use) => use(workerStorageState),
+
+  workerStorageState: [
+    async ({ browser }, use) => {
+      const parallelIndex = base.info().parallelIndex;
+      const authFile = path.resolve('test-results', `.auth/${parallelIndex}.json`);
+      if (fs.existsSync(authFile)) {
+        await use(authFile);
+        return;
+      } else {
+        const context = await browser.newContext({ storageState: undefined });
+        const page = await context.newPage();
+        try {
+          const pageProvider = new PageProvider(browser, page);
+
+          await page.context().tracing.start({ screenshots: true, snapshots: true });
+          const signInPage = pageProvider.loginPage;
+          await signInPage.goToPage();
+          await signInPage.login(process.env['USERNAME'], process.env['PASSWORD']);
+          await page.context().storageState({ path: authFile });
+          await page.context().tracing.stop({ path: './test-results/trace.zip' });
+          await context.close();
+        } catch (error) {
+          await page.context().tracing.stop({ path: './test-results/fialed-setup-trace.zip' });
+          await context.close();
+          throw error;
+        }
+        await use(authFile);
+      }
     },
-
-    storageState: ({ workerStorageState }, use) => use(workerStorageState),
-
-    workerStorageState: [
-        async ({ browser }, use) => {
-            const parallelIndex = base.info().parallelIndex;
-            const authFile = path.resolve('test-results', `.auth/${parallelIndex}.json`);
-            if (fs.existsSync(authFile)) {
-                await use(authFile);
-                return;
-            } else {
-                const context = await browser.newContext({ storageState: undefined });
-                const page = await context.newPage();
-                try {
-                    const pageProvider = new PageProvider(browser, page);
-
-                    await page.context().tracing.start({ screenshots: true, snapshots: true });
-                    const signInPage = pageProvider.loginPage;
-                    await signInPage.goToPage();
-                    await signInPage.login(process.env['USERNAME'], process.env['PASSWORD']);
-                    await page.context().storageState({ path: authFile });
-                    await page.context().tracing.stop({ path: './test-results/trace.zip' });
-                    await context.close();
-                } catch (error) {
-                    await page.context().tracing.stop({ path: './test-results/fialed-setup-trace.zip' });
-                    await context.close();
-                    throw error;
-                }
-                await use(authFile);
-            }
-        },
-        { scope: 'worker' }
-    ]
+    { scope: 'worker' },
+  ],
 });
 
-const expect = (
-    value: Element | any | BasePage,
-    message?: | string | { message?: string; }
-) => {
-    if (value instanceof Element) {
-        return expectBase<any>(value.locator, message);
-    } else if (value instanceof BasePage) {
-        return expectBase<any>(value.page, message);
-    }
-    return expectBase(value, message);
-}
+const expect = (value: Element | any | BasePage, message?: string | { message?: string }) => {
+  if (value instanceof Element) {
+    return expectBase<any>(value.locator, message);
+  } else if (value instanceof BasePage) {
+    return expectBase<any>(value.page, message);
+  }
+  return expectBase(value, message);
+};
 expect.soft = expectBase.soft;
 expect.poll = expectBase.poll;
 expect.extend = expectBase.extend;
