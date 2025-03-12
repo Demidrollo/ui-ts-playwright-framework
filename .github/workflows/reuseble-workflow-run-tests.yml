@@ -38,7 +38,7 @@ jobs:
     env:
       BASE_URL: ${{ inputs.baseURL }}
       USERNAME: ${{ inputs.userName }}
-      PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
     outputs:
       artifact_url: ${{ steps.set_url.outputs.artifact}}
