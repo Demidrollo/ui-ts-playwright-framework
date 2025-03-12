@@ -36,7 +36,7 @@ export const test = base.extend<
           await page.context().tracing.start({ screenshots: true, snapshots: true });
           const signInPage = pageProvider.loginPage;
           await signInPage.goToPage();
-          await signInPage.login(process.env['USERNAME'], process.env['PASSWORD']);
+          await signInPage.login(process.env['USERNAME'], process.env['USER_PASSWORD']);
           await page.context().storageState({ path: authFile });
           await page.context().tracing.stop({ path: './test-results/trace.zip' });
           await context.close();

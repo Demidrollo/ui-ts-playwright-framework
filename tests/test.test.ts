@@ -9,7 +9,7 @@ test.describe('example', () => {
     homePage = pageProvider.homePage;
   });
 
-  test.only('example', async () => {
+  test('example', async () => {
     {
       await homePage.goToPage();
       expect(await homePage.url).toEqual(urlConfig.ui.homePage);
