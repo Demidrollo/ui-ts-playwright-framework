@@ -59,7 +59,7 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
-      - name: Run ${{ inputs.testsSuite }}
+      - name: Run ${{ inputs.testsSuite }} tests
         id: tests
         run: npm run tests:${{ inputs.testsSuite }}
 

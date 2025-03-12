@@ -8,8 +8,8 @@ export const playwrightReport = 'playwright-report';
 
 export default defineConfig({
   testDir: './tests',
-  // globalSetup: require.resolve('./config/global-setup.ts'),
-  // globalTeardown: require.resolve('./config/global-teardown.ts'),
+  globalSetup: require.resolve('./config/global-setup.ts'),
+  globalTeardown: require.resolve('./config/global-teardown.ts'),
   timeout: 30 * 1000,
   expect: {
     timeout: 30 * 1000,
