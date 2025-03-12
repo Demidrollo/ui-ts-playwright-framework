@@ -16,4 +16,3 @@ jobs:
       userName: ${{ vars.USERNAME }}
     secrets:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-
