@@ -1,0 +1,23 @@
+name: PR Code Quality Checks
+
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install modules
+        run: yarn
+
+      - name: Run ESLint
+        run: yarn run eslint --ignore-path .eslintignore --ext .ts src/
+
+      - name: Run Prettier
+        run: yarn run prettier:check

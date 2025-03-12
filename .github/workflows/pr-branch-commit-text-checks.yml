@@ -1,0 +1,61 @@
+name: PR & Branch & Commit Titles & Texts Checks
+
+on: 
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - edited
+      - reopened
+
+concurrency: 
+  group: ${{ github.workflow }} - ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs: 
+  pr-naming:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check branch name
+        uses: actions/github-script@v6
+        env:
+          branchName: ${{ github.head_ref }}
+        with:
+          script: |
+            const { branchName } = process.env;
+            const pattern = /^(task|bugfix)\/TASK-\d+/;
+            if (!pattern.test(branchName)) {
+              core.setFailed('The branch name is invalid');
+            }
+
+      - name: Check PR title
+        uses: actions/github-script@v6
+        env: 
+          prTitle: ${{ github.event.pull_request.title }}
+        with: 
+          script: |
+            const { prTitle } = process.env;
+            const pattern = /^TASK-\d+ [A-Z]+.*[^\.]+$/;
+            if (!pattern.test(prTitle)) {
+              core.setFailed('The PR title is invalid');
+            }
+      
+      - name: Check commit messages
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const pattern = /^TASK-\d+: [a-z]+.|(^Merge.*)|(^Revert.*)/;
+            const commits = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            if (commits.data.some(({ commit }) => !pattern.test(commit.message))) {
+              core.setFailed('The commit message is invalid');
+            }

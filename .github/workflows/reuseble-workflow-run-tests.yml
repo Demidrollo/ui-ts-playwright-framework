@@ -1,0 +1,78 @@
+name: Tests
+
+on:
+   workflow_call:
+     outputs:
+       artifact_url:
+          description: 'tests artifacts url'
+          value: ${{ steps.set_url.outputs.artifact }}
+       status:
+          description: 'tests run status'
+          value: ${{ steps.set_status.outputs.job_status }}
+          
+     inputs:
+         worker_type:
+            type: string
+            required: false
+            default: 'ubuntu-latest'
+         baseURL: 
+            type: string
+            required: true
+         userName:
+            type: string
+            required: true
+         testsSuite:
+            type: string
+            required: true
+
+     secrets:
+         USER_PASSWORD: 
+            required: true
+
+jobs:
+   tests:
+      timeout-minutes: 60
+      name: ${{ inputs.testsSuite }}
+      runs-on: ${{ inputs.worker_type }}
+
+      env:
+         BASE_URL: ${{ inputs.baseURL }}
+         USERNAME: ${{ inputs.userName }}
+         PASSWORD: ${{ secrets.USER_PASSWORD }}
+   
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+      
+        - name: Install Dependencies
+          run: npm ci
+
+        - name: Install Playwright
+          run: npx playwright install --with-deps
+
+        - name: Run ${{ inputs.testsSuite }}
+          id: tests
+          run: npm run tests:${{ inputs.testsSuite }}
+
+        - name: Set status
+          id: set_status
+          run: echo "job_status=${{ steps.tests.outcome }}" >> $GITHUB_OUTPUT
+          if: always()
+
+        - uses: actions/upload-artifact@v4
+          id: upload_artifact
+          if: always()
+          with:
+            name: ${{ inputs.testsSuite }}-tests-report
+            path: playwright-report/
+            retention-days: 4
+      
+        - name: Set URL
+          id: set_url
+          run: echo "artifact=${{ steps.upload_artifact.outputs.artifact-url }}" >> $GITHUB_OUTPUT
+          if: always()
