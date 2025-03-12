@@ -27,4 +27,4 @@ jobs:
       userName: ${{ inputs.userName }}
       testsSuite: all
     secrets:
-      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}      

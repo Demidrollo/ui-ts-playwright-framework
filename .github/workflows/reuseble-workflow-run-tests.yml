@@ -5,10 +5,10 @@ on:
     outputs:
       artifact_url:
         description: 'tests artifacts url'
-        value: ${{ steps.set_url.outputs.artifact }}
+        value: ${{ jobs.tests.outputs.artifact_url }}
       status:
         description: 'tests run status'
-        value: ${{ steps.set_status.outputs.job_status }}
+        value: ${{ jobs.tests.outputs.status }}
 
     inputs:
       worker_type:
@@ -39,6 +39,10 @@ jobs:
       BASE_URL: ${{ inputs.baseURL }}
       USERNAME: ${{ inputs.userName }}
       PASSWORD: ${{ secrets.USER_PASSWORD }}
+
+    outputs:
+      artifact_url: ${{ steps.set_url.outputs.artifact}}
+      status: ${{ steps.set_status.outputs.job_status }}
 
     steps:
       - name: Checkout Repository

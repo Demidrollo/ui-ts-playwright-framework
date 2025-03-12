@@ -2,7 +2,7 @@ name: Pipeline
 
 on:
   push:
-    brunches:
+    branches:
       - 'task/*'
       - 'TASK/*'
       - main
