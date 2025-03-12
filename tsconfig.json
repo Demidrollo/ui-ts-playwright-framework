@@ -1,24 +1,16 @@
 {
-    "compilerOptions": {
-        "target": "ES6",
-        "module": "commonjs",
-        "noImplicitAny": false,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "baseUrl": ".",
-        "paths": {
-            "@core/*": [
-                "src/core/*"
-            ],
-            "@page/*": [
-                "src/page/*"
-            ],
-            "@fixtures/*": [
-                "src/fixtures/*"
-            ],
-            "@config/*": [
-                "sre/config/*"
-            ]
-        }
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@page/*": ["src/page/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@config/*": ["sre/config/*"]
     }
+  }
 }

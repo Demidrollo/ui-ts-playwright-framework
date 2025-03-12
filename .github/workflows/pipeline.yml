@@ -2,17 +2,17 @@ name: Pipeline
 
 on:
   push:
-     brunches:
-       - 'task/*'
-       - 'TASK/*'
-       - main
+    branches:
+      - 'task/*'
+      - 'TASK/*'
+      - main
 
 jobs:
   all-tests:
-     uses: ./.github/workflows/run-tests-suite.yml
-     with:
-       worker_type: 'ubuntu-latest'
-       baseURL: ${{ vars.BASE_URL }}
-       userName: ${{ vars.USERNAME }}
-     secrets:
-       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+    uses: ./.github/workflows/run-tests-suite.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{ vars.BASE_URL }}
+      userName: ${{ vars.USERNAME }}
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
