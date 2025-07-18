@@ -29,7 +29,6 @@ export default defineConfig({
     trace: 'on-first-retry',
     video: 'on-first-retry',
     screenshot: 'only-on-failure',
-    storageState: auth,
   },
   projects: [
     {
