@@ -15,7 +15,7 @@ const compat = new FlatCompat({
 });
 
 export default [
-  ...compat.extends('plugin:playwright/playwright-test', 'plugin:@typescript-eslint/recommended'),
+  ...compat.extends(),
   {
     plugins: {
       '@typescript-eslint': typescriptEslint,
