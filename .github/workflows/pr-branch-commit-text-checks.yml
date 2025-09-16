@@ -39,7 +39,7 @@ jobs:
         with:
           script: |
             const { prTitle } = process.env;
-            const pattern = /^TASK-\d+: [A-Z]+.*[^\.]+$/;
+            const pattern = /^(TASK-|task-)\d+: [a-zA-Z]+.*[^\.]+$/;
             if (!pattern.test(prTitle)) {
               core.setFailed('The PR title is invalid');
             }
@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const pattern = /^TASK-\d+: [a-z]+.|(^Merge.*)|(^Revert.*)/;
+            const pattern = /^(TASK-|task-)\d+:\s?[a-z]+.|(^Merge.*)|(^Revert.*)/;
             const commits = await github.rest.pulls.listCommits({
               owner: context.repo.owner,
               repo: context.repo.repo,
