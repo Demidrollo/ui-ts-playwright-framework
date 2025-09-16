@@ -27,7 +27,7 @@ jobs:
         with:
           script: |
             const { branchName } = process.env;
-            const pattern = /^(task-|bugfix-|TASK-)\d+/;
+            const pattern = /^(task-|bugfix-|TASK-)\d+:[\w\-]+$/;
             if (!pattern.test(branchName)) {
               core.setFailed('The branch name is invalid');
             }

@@ -1,6 +1,5 @@
 import { Browser, Page } from 'playwright/test';
-import { HomePage } from './home.page';
-import { LoginPage } from './login.page';
+import { HomePage, CareersPage, JobBoard } from './index';
 
 export class PageProvider {
   private browser: Browser;
@@ -8,10 +7,10 @@ export class PageProvider {
   private pageObject = new Map<string, any>();
 
   constructor(browser: Browser, page: Page) {
-    this.browser = browser;
     this.page = page;
     this.registerPageObject('HomePage', HomePage);
-    this.registerPageObject('LoginPage', LoginPage);
+    this.registerPageObject('CareersPage', CareersPage);
+    this.registerPageObject('JobBoard', JobBoard);
   }
 
   registerPageObject(key: string, pageObjectClass: any): void {
@@ -30,7 +29,11 @@ export class PageProvider {
     return this.getPageObject<HomePage>('HomePage');
   }
 
-  get loginPage(): LoginPage {
-    return this.getPageObject<LoginPage>('LoginPage');
+  get careersPage(): CareersPage {
+    return this.getPageObject<CareersPage>('CareersPage');
+  }
+
+  get jobBoard(): JobBoard {
+    return this.getPageObject<JobBoard>('JobBoard');
   }
 }

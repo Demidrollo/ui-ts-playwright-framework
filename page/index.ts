@@ -1,2 +1,3 @@
 export { HomePage } from './home.page';
-export { LoginPage } from './login.page';
+export { CareersPage } from './careers.page';
+export { JobBoard } from './jobboard.page';
