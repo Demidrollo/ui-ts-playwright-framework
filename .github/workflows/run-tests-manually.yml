@@ -1,0 +1,23 @@
+name: Manual Tests Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      testSuite:
+        description: 'Select which test suite to run'
+        required: true
+        type: choice
+        options:
+          - dunnhumby
+          - regula
+
+jobs:
+  dunnhumby-tests:
+    uses: ./.github/workflows/reuseble-workflow-run-tests.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{ vars.BASE_URL }}
+      userName: ${{ vars.USERNAME }}
+      testsSuite: ${{ inputs.testSuite}}
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

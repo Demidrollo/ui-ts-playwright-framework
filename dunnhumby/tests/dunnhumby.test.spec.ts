@@ -1,6 +1,6 @@
-import { test } from 'fixtures/dunnhumby.fixture';
+import { test } from 'dunnhumby/fixtures/dunnhumby.fixture';
 import { expect } from '@playwright/test';
-import { dunnhumbyTestData } from 'test-data/dunnhumby.test.data';
+import { dunnhumbyTestData } from 'dunnhumby/test-data/dunnhumby.test.data';
 
 test('Dunnhumby original test', async ({ pageProvider }) => {
   const homePage = pageProvider.homePage;

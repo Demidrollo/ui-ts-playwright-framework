@@ -1,6 +1,6 @@
 import { test as base } from 'playwright/test';
 import { PageProvider } from '../page/page.provider';
-import { cookies } from 'utils/cookies';
+import { cookies } from '../test-data/cookies';
 
 export const test = base.extend<
   {
