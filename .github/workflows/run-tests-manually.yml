@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       testSuite:
-        description: "Select which test suite to run"
+        description: 'Select which test suite to run'
         required: true
         type: choice
         options:

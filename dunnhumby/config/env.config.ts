@@ -1,4 +1,4 @@
-import config from 'dunnhumby/playwright.config'
+import config from 'dunnhumby/playwright.config';
 
 export const baseUrl = process.env.BASE_URL || config.use.baseURL;
 

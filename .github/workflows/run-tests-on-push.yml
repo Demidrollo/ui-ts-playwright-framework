@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  dunnhumby-tests:
+  tests-dunnhumby:
     uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
