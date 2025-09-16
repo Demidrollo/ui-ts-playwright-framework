@@ -13,6 +13,9 @@ on:
       userName:
         type: string
         required: true
+      testSuite: 
+        type: string
+        required: true
 
     secrets:
       USER_PASSWORD:
@@ -25,6 +28,6 @@ jobs:
       worker_type: ${{ inputs.worker_type }}
       baseURL: ${{ inputs.baseURL }}
       userName: ${{ inputs.userName }}
-      testsSuite: all
+      testsSuite: ${{inputs.testSuite}}
     secrets:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

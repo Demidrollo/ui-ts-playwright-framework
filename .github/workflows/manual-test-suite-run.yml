@@ -1,0 +1,24 @@
+name: Pipeline
+
+on: 
+ workflow_dispatch:
+    inputs:
+      testSuite:
+        description: 'Select the test suite to run'
+        required: true
+        default: 'dunnhumby'
+        type: choice
+        options:
+          - dunnhumby
+          - regula
+
+jobs:
+  run-tests:
+    uses: ./.github/workflows/run-tests-suite.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{ vars.BASE_URL }}
+      userName: ${{ vars.USERNAME }}
+      testSuite: ${{ github.event.inputs.testSuite }}
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

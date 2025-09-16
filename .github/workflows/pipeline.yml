@@ -3,17 +3,29 @@ name: Pipeline
 on:
   push:
     branches:
-      - dunnhumby_test
       - 'task/*'
       - 'TASK/*'
       - main
 
 jobs:
-  all-tests:
+  dunnhumby_tests:
+    name: Dunnhumby tests
     uses: ./.github/workflows/run-tests-suite.yml
     with:
       worker_type: 'ubuntu-latest'
       baseURL: ${{ vars.BASE_URL }}
       userName: ${{ vars.USERNAME }}
+      testSuite: dunnhumby
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+
+  regula_tests:
+    name: Regula tests
+    uses: ./.github/workflows/run-tests-suite.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{ vars.BASE_URL }}
+      userName: ${{ vars.USERNAME }}
+      testSuite: regula
     secrets:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

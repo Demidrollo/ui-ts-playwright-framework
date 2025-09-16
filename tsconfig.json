@@ -10,8 +10,7 @@
       "@core/*": ["src/core/*"],
       "@page/*": ["src/page/*"],
       "@fixtures/*": ["src/fixtures/*"],
-      "@config/*": ["sre/config/*"],
-      "@test-data/*": ["sre/test-data/*"]
+      "@config/*": ["sre/config/*"]
     }
   }
 }

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { playwrightReport, testResults } from 'playwright.config';
+import { playwrightReport, testResults } from 'playwright.config.dunnhumby';
 
 export default async function globalSetup() {
   fs.rmSync(testResults, {
