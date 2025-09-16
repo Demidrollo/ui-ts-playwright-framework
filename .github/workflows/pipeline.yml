@@ -3,6 +3,7 @@ name: Pipeline
 on:
   push:
     branches:
+      - dunnhumby_test
       - 'task/*'
       - 'TASK/*'
       - main
