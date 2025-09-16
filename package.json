@@ -5,9 +5,9 @@
   "scripts": {
     "test": "playwright test",
     "tests:all": "playwright test",
-    "tests:headless": "playwright test --headed",
-    "tests:debug": "playwright test --debug",
-    "tests:report": "playwright test --reporter=list",
+    "tests:dunnhumby": "playwright test --config=dunnhumby/playwright.config.ts",
+    "tests:dunnhumby:headless": "playwright test --headed --config=dunnhumby/playwright.config.ts",
+    "tests:dunnhumby:debug": "playwright test --debug --config=dunnhumby/playwright.config.ts",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "eslint": "eslint .",

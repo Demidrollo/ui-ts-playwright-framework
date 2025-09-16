@@ -2,9 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 
 import {} from 'dotenv/config';
 
-export const auth = 'test-results/.auth';
-export const testResults = 'test-results';
-export const playwrightReport = 'playwright-report';
+export const auth = '../test-results/.auth';
+export const testResults = '../test-results';
+export const playwrightReport = '../playwright-report';
 
 export default defineConfig({
   testDir: './tests',
@@ -29,6 +29,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     video: 'on-first-retry',
     screenshot: 'only-on-failure',
+    baseURL: 'https://www.dunnhumby.com/',
   },
   projects: [
     {

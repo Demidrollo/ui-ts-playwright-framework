@@ -1,4 +1,4 @@
-name: Pipeline
+name: Run Tests on Push
 
 on:
   push:
@@ -8,11 +8,12 @@ on:
       - main
 
 jobs:
-  all-tests:
-    uses: ./.github/workflows/run-tests-suite.yml
+  dunnhumby-tests:
+    uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
       baseURL: ${{ vars.BASE_URL }}
       userName: ${{ vars.USERNAME }}
+      testsSuite: dunnhumby
     secrets:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

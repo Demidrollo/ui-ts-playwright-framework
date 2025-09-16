@@ -1,4 +1,4 @@
-import { test } from 'fixtures/dunnhumby.fixture';
+import { test } from 'dunnhumby/fixtures/dunnhumby.fixture';
 import { expect, Locator } from '@playwright/test';
 
 test.fixme('Dunnhumby draft test', async ({ page }) => {
