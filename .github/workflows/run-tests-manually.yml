@@ -16,7 +16,7 @@ jobs:
     uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
-      baseURL: ${{ vars.BASE_URL }}
+      baseURL: ${{inputs.testSuite == 'dunnhumby' && vars.BASE_URL_DUNNHUMBY || inputs.testSuite == 'regula' && vars.BASE_URL_REGULA }}
       userName: ${{ vars.USERNAME }}
       testsSuite: ${{ inputs.testSuite}}
     secrets:

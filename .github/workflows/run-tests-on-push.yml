@@ -12,8 +12,18 @@ jobs:
     uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
-      baseURL: ${{ vars.BASE_URL }}
+      baseURL: ${{ vars.BASE_URL_DUNNHUMBY }}
       userName: ${{ vars.USERNAME }}
       testsSuite: dunnhumby
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+
+  tests-regula:
+    uses: ./.github/workflows/reuseble-workflow-run-tests.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{ vars.BASE_URL_DUNNHUMBY }}
+      userName: ${{ vars.USERNAME }}
+      testsSuite: regula
     secrets:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}

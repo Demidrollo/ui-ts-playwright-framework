@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "tests:all": "playwright test",
+    "test": "playwright test --config=regula/playwright.config.ts & playwright test --config=dunnhumby/playwright.config.ts ",
+    "tests:regula": "playwright test --config=regula/playwright.config.ts",
+    "tests:regula:headless": "playwright test --headed --config=regula/playwright.config.ts",
+    "tests:regula:debug": "playwright test --debug --config=regula/playwright.config.ts",
     "tests:dunnhumby": "playwright test --config=dunnhumby/playwright.config.ts",
     "tests:dunnhumby:headless": "playwright test --headed --config=dunnhumby/playwright.config.ts",
     "tests:dunnhumby:debug": "playwright test --debug --config=dunnhumby/playwright.config.ts",
