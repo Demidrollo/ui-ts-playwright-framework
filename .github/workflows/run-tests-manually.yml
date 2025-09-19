@@ -12,7 +12,7 @@ on:
           - regula
 
 jobs:
-  dunnhumby-tests:
+  tests:
     uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
