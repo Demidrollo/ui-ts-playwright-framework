@@ -8,15 +8,15 @@ on:
         required: true
         type: choice
         options:
-          - dunnhumby
+          - example
           - regula
-
 jobs:
-  dunnhumby-tests:
+  tests:
     uses: ./.github/workflows/reuseble-workflow-run-tests.yml
     with:
       worker_type: 'ubuntu-latest'
-      baseURL: ${{ vars.BASE_URL }}
+      baseURL: ${{inputs.testSuite == 'example' && vars.BASE_URL || inputs.testSuite == 'regula' && vars.BASE_URL_REGULA }}
+
       userName: ${{ vars.USERNAME }}
       testsSuite: ${{ inputs.testSuite}}
     secrets:
