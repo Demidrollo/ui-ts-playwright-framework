@@ -1,6 +1,6 @@
 name: PR Code Quality Checks
 
-on: 
+on:
   pull_request:
     branches:
       - main
@@ -17,7 +17,7 @@ jobs:
         run: yarn
 
       - name: Run ESLint
-        run: yarn run eslint --ignore-path .eslintignore --ext .ts src/
+        run: yarn run eslint --ignore-pattern .eslintignore --ext .ts .
 
       - name: Run Prettier
         run: yarn run prettier:check

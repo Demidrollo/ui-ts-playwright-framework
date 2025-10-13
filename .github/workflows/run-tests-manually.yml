@@ -1,0 +1,23 @@
+name: Manual Tests Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      testSuite:
+        description: 'Select which test suite to run'
+        required: true
+        type: choice
+        options:
+          - example
+          - regula
+
+jobs:
+  tests:
+    uses: ./.github/workflows/reuseble-workflow-run-tests.yml
+    with:
+      worker_type: 'ubuntu-latest'
+      baseURL: ${{inputs.testSuite == 'example' && vars.BASE_URL || inputs.testSuite == 'regula' && vars.BASE_URL_REGULA }}
+      userName: ${{ vars.USERNAME }}
+      testsSuite: ${{ inputs.testSuite}}
+    secrets:
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
