@@ -16,3 +16,10 @@ export async function uploadFile(
   // should be replaced with proper wait for element that appears after file upload
   // await page.waitForTimeout(2000);
 }
+
+const fetchData = () => new Promise((res) => setTimeout(() => res("data"), 1000));
+
+fetchData()
+  .then(result => console.log("Then:", result))  // Then: data
+  .catch(err => console.error("Catch:", err));
+  

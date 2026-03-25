@@ -11,7 +11,7 @@ export function getCurrentDateTime(): string {
     ${date.getDate()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 }
 
-export function generateStringWithLenght(length: number, baseString?: string): string {
+export const generateStringWithLenght = (length: number, baseString?: string): string => {
   let newString = baseString ?? '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   for (let i = newString.length; i < length; i++) {
